@@ -229,16 +229,38 @@
 <div class="flow-step"><div class="num">3</div><span>Otros usuarios activos pueden ver quién está disponible</span></div>
 <div class="flow-step"><div class="num">4</div><span>Un usuario elige un trago del menú y lo envía a otro</span></div>
 <div class="flow-step"><div class="num">5</div><span>El destinatario acepta o rechaza (sin presión)</span></div>
-<div class="flow-step"><div class="num">6</div><span>Si acepta, la barra recibe la orden, prepara el trago y lo cobra como cualquier consumo</span></div>
-<div class="flow-step"><div class="num">7</div><span>Se abre un chat entre ambos (opcional)</span></div>
+<div class="flow-step"><div class="num">6</div><span>Si acepta, la app le revela al que envió en qué mesa está el otro</span></div>
+<div class="flow-step"><div class="num">7</div><span>El que envía llama al garzón: "Un [trago] para la mesa X, cárgalo a mi cuenta"</span></div>
+<div class="flow-step"><div class="num">8</div><span>El garzón prepara, entrega en la mesa destino y cobra a la mesa del que envió</span></div>
+<div class="flow-step"><div class="num">9</div><span>Se abre un chat entre ambos (opcional)</span></div>
+
+<h3>¿Por qué necesitamos identificar cada mesa?</h3>
+
+<div class="highlight-box">
+    <p>El flujo de entrega depende de que ambos usuarios sepan en qué mesa están. Cuando el trago es aceptado, el que envía necesita decirle al garzón: "Lleva un trago a la mesa 3, cárgalo a mi mesa (5)". Sin identificación de mesa, no hay forma de completar la entrega.</p>
+</div>
+
+<h4>Opciones para identificar la mesa:</h4>
+<table>
+    <tr><th>Método</th><th>Cómo funciona</th><th>Precisión</th><th>Complejidad</th></tr>
+    <tr><td><strong>QR único por mesa</strong></td><td>Cada mesa tiene un QR distinto. Al escanear, auto-asigna.</td><td>100%</td><td>Media</td></tr>
+    <tr><td><strong>NFC por mesa</strong></td><td>Sticker NFC en cada mesa (~$0.30). Tap = check-in.</td><td>100%</td><td>Media</td></tr>
+    <tr><td><strong>QR genérico + selección manual</strong></td><td>Un solo QR. La app pregunta "¿En qué mesa estás?"</td><td>Alta (puede haber error humano)</td><td>Baja</td></tr>
+    <tr><td><strong>Sticker numerado + input</strong></td><td>Sticker con número visible. Usuario lo escribe.</td><td>Alta</td><td>Baja</td></tr>
+    <tr><td><strong>Bluetooth beacons</strong></td><td>Beacon por mesa, detección automática.</td><td>100%</td><td>Alta (hardware)</td></tr>
+</table>
+
+<div class="highlight-box">
+    <p><strong>Decisión actual:</strong> QR único por mesa es la solución elegida por precisión y familiaridad del usuario (post-COVID todos saben escanear QRs). Alternativas como NFC o selección manual se evaluarán según fricción en terreno.</p>
+</div>
 
 <h3>¿Qué resuelve el QR de check-in?</h3>
 <ul>
     <li><strong>Privacidad:</strong> Solo apareces si TÚ quieres</li>
     <li><strong>Consentimiento:</strong> Todos los visibles optaron por participar</li>
     <li><strong>Validación:</strong> Confirma que estás físicamente en el bar (QR único por mesa)</li>
-    <li><strong>Diferenciación:</strong> Separa a quienes quieren socializar de quienes no</li>
-    <li><strong>Ubicación exacta:</strong> Cada mesa tiene su propio QR, permitiendo saber dónde estás sentado</li>
+    <li><strong>Ubicación exacta:</strong> Cada mesa tiene su propio QR — permite saber dónde estás para la entrega del trago</li>
+    <li><strong>Operación sin fricción:</strong> El garzón sabe a qué mesa llevar y a cuál cobrar</li>
 </ul>
 
 <hr class="section-divider">
