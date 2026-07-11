@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DateFriendly - Pitch para Bares</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d0d0d;
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .cover {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 40px;
+        }
+        .cover h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .cover .tagline {
+            font-size: 1.1em;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        .cover .desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+        h2 {
+            font-size: 1.6em;
+            color: #ff6b6b;
+            margin: 40px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #333;
+        }
+        h3 {
+            font-size: 1.2em;
+            color: #feca57;
+            margin: 25px 0 10px;
+        }
+        h4 {
+            font-size: 1em;
+            color: #f0f0f0;
+            margin: 15px 0 8px;
+        }
+        p, li {
+            color: #ccc;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        li { margin-bottom: 6px; }
+        .highlight-box {
+            background: #1a1a2e;
+            border-left: 4px solid #ff6b6b;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box p {
+            color: #eee;
+            font-style: italic;
+        }
+        .benefit-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .benefit-card strong {
+            color: #feca57;
+            display: block;
+            margin-bottom: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.85em;
+            overflow-x: auto;
+            display: block;
+        }
+        th, td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        th {
+            background: #1a1a2e;
+            color: #feca57;
+            font-weight: 600;
+        }
+        td { color: #ccc; }
+        tr:hover td { background: #1a1a1a; }
+        .tag-si {
+            background: #27ae60;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .tag-no {
+            background: #555;
+            color: #999;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        .tag-parcial {
+            background: #f39c12;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        .section-divider {
+            border: none;
+            border-top: 1px solid #333;
+            margin: 30px 0;
+        }
+        .flow-step {
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .flow-step .num {
+            background: #ff6b6b;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+        .objection {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 12px 0;
+        }
+        .objection .q {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .objection .a {
+            color: #a8e6cf;
+        }
+        .priority-high { border-left: 4px solid #ff6b6b; }
+        .priority-med { border-left: 4px solid #feca57; }
+        .priority-low { border-left: 4px solid #74b9ff; }
+        .feature-item {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+        }
+        .feature-item strong { color: #f0f0f0; }
+        .feature-item span { color: #999; font-size: 0.9em; }
+        .security-item {
+            background: #1a1a1a;
+            border-left: 4px solid #e74c3c;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 15px;
+            margin: 8px 0;
+        }
+        .summary-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #222;
+        }
+        .summary-metric .label { color: #999; }
+        .summary-metric .value { color: #feca57; font-weight: bold; }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+    <h1>DateFriendly</h1>
+    <p class="tagline">Pitch para Bares | Competidores | Funcionalidades</p>
+    <p class="desc">App geolocalizada + QR para regalar tragos en bares</p>
+    <p class="desc" style="margin-top: 15px; color: #555;">www.datefriendly.com | Julio 2026</p>
+</div>
+
+<!-- 1. CONCEPTO -->
+<h2>1. El Concepto</h2>
+
+<h3>¿Qué es DateFriendly?</h3>
+<p>Una app donde los clientes de un bar pueden regalarse tragos entre sí directamente desde sus teléfonos. El sistema de check-in por QR asegura que solo participan quienes quieren.</p>
+
+<h3>¿Cómo funciona?</h3>
+
+<div class="flow-step"><div class="num">1</div><span>El cliente llega al bar y escanea el QR de su mesa (cada mesa tiene uno único)</span></div>
+<div class="flow-step"><div class="num">2</div><span>Aparece como "activo" en la app — solo si quiere participar</span></div>
+<div class="flow-step"><div class="num">3</div><span>Otros usuarios activos pueden ver quién está disponible</span></div>
+<div class="flow-step"><div class="num">4</div><span>Un usuario elige un trago del menú y lo envía a otro</span></div>
+<div class="flow-step"><div class="num">5</div><span>El destinatario acepta o rechaza (sin presión)</span></div>
+<div class="flow-step"><div class="num">6</div><span>Si acepta, la barra recibe la orden y prepara el trago</span></div>
+<div class="flow-step"><div class="num">7</div><span>Se abre un chat entre ambos (opcional)</span></div>
+
+<h3>¿Qué resuelve el QR de check-in?</h3>
+<ul>
+    <li><strong>Privacidad:</strong> Solo apareces si TÚ quieres</li>
+    <li><strong>Consentimiento:</strong> Todos los visibles optaron por participar</li>
+    <li><strong>Validación:</strong> Confirma que estás físicamente en el bar (QR único por mesa)</li>
+    <li><strong>Diferenciación:</strong> Separa a quienes quieren socializar de quienes no</li>
+    <li><strong>Ubicación exacta:</strong> Cada mesa tiene su propio QR, permitiendo saber dónde estás sentado</li>
+</ul>
+
+<hr class="section-divider">
+
+<!-- 2. PITCH PARA BARES -->
+<h2>2. Pitch para Bares</h2>
+
+<h3>El Problema</h3>
+<div class="highlight-box">
+    <p>"Cada noche tienes clientes que quieren socializar pero no se atreven. Mientras tanto, otros gastan menos porque no tienen una razón para quedarse más tiempo. Estás dejando dinero en la mesa."</p>
+</div>
+
+<h3>La Solución</h3>
+<div class="highlight-box">
+    <p>"DateFriendly es una app donde tus clientes pueden regalarse tragos entre sí desde sus teléfonos. Nosotros les damos una razón para quedarse más tiempo, pedir más y volver. Tú no cambias nada de tu operación — solo ponemos un QR en cada mesa y recibes más ventas."</p>
+</div>
+
+<h3>Beneficios Concretos</h3>
+
+<div class="benefit-card">
+    <strong>Más tragos vendidos</strong>
+    Cada trago regalado es una venta incremental que no hubiera ocurrido sin la app.
+</div>
+
+<div class="benefit-card">
+    <strong>Mayor permanencia</strong>
+    Los usuarios se quedan más tiempo esperando interacciones = más consumo total.
+</div>
+
+<div class="benefit-card">
+    <strong>Recurrencia</strong>
+    Los clientes vuelven porque "ahí hay gente activa en DateFriendly".
+</div>
+
+<div class="benefit-card">
+    <strong>Data gratis</strong>
+    Sabes cuántos clientes activos tienes, horarios pico sociales, tragos populares.
+</div>
+
+<div class="benefit-card">
+    <strong>Marketing gratuito</strong>
+    Tu bar aparece en la app = visibilidad ante nuevos clientes que buscan dónde ir.
+</div>
+
+<div class="benefit-card">
+    <strong>Sin inversión</strong>
+    No necesitas hardware, POS nuevo, ni personal extra. Solo QRs en cada mesa.
+</div>
+
+<h3>Modelo Económico para el Bar</h3>
+
+<table>
+    <tr><th>Opción</th><th>Cómo funciona</th></tr>
+    <tr><td><strong>A: Comisión</strong></td><td>No paga nada fijo. DateFriendly cobra 10-20% por trago vendido. Pago semanal/quincenal.</td></tr>
+    <tr><td><strong>B: Suscripción</strong></td><td>Fee mensual $30-80 USD + comisión reducida (5-10%). Incluye perfil destacado, analytics y QRs personalizados.</td></tr>
+    <tr><td><strong>C: Gratis (lanzamiento)</strong></td><td>Sin costo los primeros 3 meses. Incluye QRs para todas las mesas. Objetivo: masa crítica.</td></tr>
+</table>
+
+<h3>Objeciones Comunes</h3>
+
+<div class="objection">
+    <p class="q">"¿Y si nadie lo usa?"</p>
+    <p class="a">"No te cuesta nada tenerlo. Son QRs en cada mesa. Si funciona, ganas más. Si no, no perdiste nada."</p>
+</div>
+
+<div class="objection">
+    <p class="q">"Ya tengo mucho trabajo"</p>
+    <p class="a">"Tu staff no tiene que hacer nada diferente. Solo prepara el trago cuando llega el pedido a la pantalla."</p>
+</div>
+
+<div class="objection">
+    <p class="q">"¿Es seguro?"</p>
+    <p class="a">"Cada transacción es prepagada. Recibes el dinero antes de preparar el trago. Cero riesgo."</p>
+</div>
+
+<div class="objection">
+    <p class="q">"¿Cómo sé que funciona?"</p>
+    <p class="a">"Te damos un dashboard con métricas en tiempo real: tragos vendidos, horarios pico, usuarios activos."</p>
+</div>
+
+<div class="objection">
+    <p class="q">"¿Qué pasa si el cliente ya se fue?"</p>
+    <p class="a">"El check-out es automático. Solo se muestran personas que están físicamente presentes."</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- 3. COMPETIDORES -->
+<h2>3. Análisis de Competidores</h2>
+
+<h3>Competidores Directos</h3>
+
+<table>
+    <tr><th>App</th><th>País</th><th>Modelo</th><th>vs DateFriendly</th></tr>
+    <tr>
+        <td><strong>Dion</strong></td>
+        <td>USA (NYC, Miami, Dubai)</td>
+        <td>Social club exclusivo. Envío de tragos/experiencias a contactos en venues premium. Valuación: $20M.</td>
+        <td>Exclusivo y aspiracional. No es presencial simultáneo. Waitlist de 20k. DateFriendly es masivo e in-situ.</td>
+    </tr>
+    <tr>
+        <td><strong>Queue It Social</strong></td>
+        <td>USA</td>
+        <td>Envías tragos a amigos, los redimen cuando llegan al bar.</td>
+        <td>Es para amigos remotos ("te dejo un trago para cuando vayas"). DateFriendly es in-situ con desconocidos.</td>
+    </tr>
+    <tr>
+        <td><strong>OneOnMe</strong></td>
+        <td>USA</td>
+        <td>Gifting social: envías tragos/comidas, redimen con Visa virtual.</td>
+        <td>Gifting asíncrono entre amigos. No es social/flirteo presencial.</td>
+    </tr>
+    <tr>
+        <td><strong>Drink On Me</strong></td>
+        <td>USA</td>
+        <td>Link de pago → tarjeta virtual para Apple/Google Wallet.</td>
+        <td>Puro gifting digital, sin geolocalización ni componente social.</td>
+    </tr>
+    <tr>
+        <td><strong>Tipsi</strong></td>
+        <td>UK</td>
+        <td>QR en mesas para pedir y enviar tragos con mensaje.</td>
+        <td>Es operacional (reemplaza mesero), no social/dating.</td>
+    </tr>
+    <tr>
+        <td><strong>Bartab</strong></td>
+        <td>USA (SF)</td>
+        <td>App para comprar tragos a $1 para amigos. Facebook Connect.</td>
+        <td>Cerrada ~2013. Modelo de subsidio insostenible. Lección: precio del trago debe ser real.</td>
+    </tr>
+</table>
+
+<h3>Competidores Indirectos</h3>
+
+<table>
+    <tr><th>App</th><th>Overlap con DateFriendly</th></tr>
+    <tr><td><strong>Tinder / Bumble</strong></td><td>Misma misión (conocer gente), pero sin transacción real ni presencialidad</td></tr>
+    <tr><td><strong>Happn</strong></td><td>Geolocalización + personas cercanas, pero sin contexto de bar ni interacción tangible</td></tr>
+    <tr><td><strong>DUSK (ex-Drinki)</strong></td><td>Rewards/deals en bares UK, no es social entre usuarios</td></tr>
+    <tr><td><strong>Bibe</strong></td><td>Mobile ordering en bares (skip the line), no es social</td></tr>
+</table>
+
+<h3>Ventaja Competitiva Clave</h3>
+
+<table>
+    <tr>
+        <th>Factor</th>
+        <th>DateFriendly</th>
+        <th>Dion</th>
+        <th>Queue It</th>
+        <th>Tinder</th>
+    </tr>
+    <tr>
+        <td>Presencial (ambos en el bar)</td>
+        <td><span class="tag-si">SÍ</span></td>
+        <td><span class="tag-no">NO</span></td>
+        <td><span class="tag-no">NO</span></td>
+        <td><span class="tag-no">NO</span></td>
+    </tr>
+    <tr>
+        <td>Check-in con consentimiento (QR por mesa)</td>
+        <td><span class="tag-si">SÍ</span></td>
+        <td><span class="tag-no">NO</span></td>
+        <td><span class="tag-no">NO</span></td>
+        <td><span class="tag-no">NO</span></td>
+    </tr>
+    <tr>
+        <td>Para desconocidos / flirteo</td>
+        <td><span class="tag-si">SÍ</span></td>
+        <td><span class="tag-parcial">PARCIAL</span></td>
+        <td><span class="tag-no">NO</span></td>
+        <td><span class="tag-si">SÍ</span></td>
+    </tr>
+    <tr>
+        <td>Trago real inmediato</td>
+        <td><span class="tag-si">SÍ</span></td>
+        <td><span class="tag-parcial">DIFERIDO</span></td>
+        <td><span class="tag-parcial">DIFERIDO</span></td>
+        <td><span class="tag-no">NO</span></td>
+    </tr>
+    <tr>
+        <td>Masivo (no exclusivo)</td>
+        <td><span class="tag-si">SÍ</span></td>
+        <td><span class="tag-no">NO</span></td>
+        <td><span class="tag-si">SÍ</span></td>
+        <td><span class="tag-si">SÍ</span></td>
+    </tr>
+    <tr>
+        <td>Opt-in explícito</td>
+        <td><span class="tag-si">SÍ</span></td>
+        <td><span class="tag-parcial">PARCIAL</span></td>
+        <td><span class="tag-no">NO</span></td>
+        <td><span class="tag-no">NO</span></td>
+    </tr>
+</table>
+
+<hr class="section-divider">
+
+<!-- 4. FUNCIONALIDADES -->
+<h2>4. Funcionalidades</h2>
+
+<h3>Core (Ya implementadas)</h3>
+<div class="feature-item priority-high">
+    <strong>✓ Geolocalización</strong> <span>— Ver bares cercanos</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>✓ Check-in vía QR de mesa</strong> <span>— Cada mesa tiene un QR único. Opt-in voluntario con ubicación precisa.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>✓ Envío de tragos</strong> <span>— A otros usuarios activos en el bar</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>✓ Aceptar / Rechazar</strong> <span>— Sin presión, con privacidad</span>
+</div>
+
+<h3>Prioridad Alta (MVP / Lanzamiento)</h3>
+
+<div class="feature-item priority-high">
+    <strong>Perfil básico</strong> <span>— Foto, nombre, bio corta. Necesario para decidir si aceptar.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>Menú digital del bar</strong> <span>— El usuario elige qué trago enviar del menú real.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>Notificación al bar</strong> <span>— La barra recibe aviso para preparar y sabe en qué mesa entregar.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>Chat post-aceptación</strong> <span>— Si acepta el trago, se abre chat temporal.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>Check-out automático</strong> <span>— Después de X horas o al salir del radio GPS.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>Pasarela de pagos</strong> <span>— Trago prepagado. Bar recibe antes de preparar.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>Dashboard bar</strong> <span>— Tragos vendidos, usuarios activos, historial.</span>
+</div>
+
+<h3>Prioridad Media (Post-lanzamiento)</h3>
+
+<div class="feature-item priority-med">
+    <strong>"Estoy abierto/a a..."</strong> <span>— Tags: conversar, conocer gente, networking.</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Modo anónimo</strong> <span>— Enviar trago sin revelar identidad hasta aceptación.</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Rating de bares</strong> <span>— Usuarios califican experiencia DateFriendly por bar.</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Historial / Gamificación</strong> <span>— "Te han regalado 12 tragos este mes".</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Grupos / Mesa</strong> <span>— Check-in grupal para enviar rondas.</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Promos del bar</strong> <span>— "Happy Hour DateFriendly: 2x1 en envíos de 8-10pm".</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Filtros de visibilidad</strong> <span>— Género, rango de edad, etc.</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Notificación pre-visita</strong> <span>— "Bar X tiene 8 personas activas ahora".</span>
+</div>
+
+<h3>Prioridad Baja (Crecimiento / Escala)</h3>
+
+<div class="feature-item priority-low">
+    <strong>Patrocinios de marcas</strong> <span>— "Este Gin Tonic te lo envía Tanqueray".</span>
+</div>
+<div class="feature-item priority-low">
+    <strong>Eventos DateFriendly</strong> <span>— Noches especiales, speed dating digital.</span>
+</div>
+<div class="feature-item priority-low">
+    <strong>Leaderboards</strong> <span>— "Top enviadores del mes" — gamificación viral.</span>
+</div>
+<div class="feature-item priority-low">
+    <strong>Integración POS</strong> <span>— Conexión directa al sistema del bar.</span>
+</div>
+<div class="feature-item priority-low">
+    <strong>Suscripción Premium</strong> <span>— Envíos ilimitados, perfil verificado.</span>
+</div>
+<div class="feature-item priority-low">
+    <strong>Referidos</strong> <span>— "Invita un amigo → ambos reciben trago gratis".</span>
+</div>
+<div class="feature-item priority-low">
+    <strong>API para bares</strong> <span>— Integración con sistemas propios de bares grandes.</span>
+</div>
+
+<h3>Seguridad (Obligatorias)</h3>
+
+<div class="security-item">
+    <strong>Botón de reporte/bloqueo</strong> <span>— Reportar acoso con un tap. Bloqueo inmediato.</span>
+</div>
+<div class="security-item">
+    <strong>Límite de envíos</strong> <span>— Máx. 2-3 tragos al mismo usuario sin respuesta.</span>
+</div>
+<div class="security-item">
+    <strong>Verificación de edad</strong> <span>— Al menos verificación 18+/21+ según país.</span>
+</div>
+<div class="security-item">
+    <strong>Rechazar sin notificación</strong> <span>— El que envía no sabe si rechazaron o no respondieron.</span>
+</div>
+<div class="security-item">
+    <strong>Check-out instantáneo</strong> <span>— Desaparecer del mapa en cualquier momento.</span>
+</div>
+<div class="security-item">
+    <strong>Consumo responsable</strong> <span>— Alertas si alguien recibe/envía demasiados tragos.</span>
+</div>
+
+<hr class="section-divider">
+
+<!-- 5. RESUMEN -->
+<h2>5. Resumen Ejecutivo</h2>
+
+<div class="summary-metric">
+    <span class="label">Mercado</span>
+    <span class="value">$1.5T industria global bares/nightlife</span>
+</div>
+<div class="summary-metric">
+    <span class="label">Competencia directa</span>
+    <span class="value">Baja (Dion es premium/exclusivo)</span>
+</div>
+<div class="summary-metric">
+    <span class="label">Monetización</span>
+    <span class="value">Comisión 10-20% + Premium + Patrocinios</span>
+</div>
+<div class="summary-metric">
+    <span class="label">Viralidad</span>
+    <span class="value">Cada trago = historia compartible</span>
+</div>
+<div class="summary-metric">
+    <span class="label">Defensibilidad</span>
+    <span class="value">Network effects locales</span>
+</div>
+<div class="summary-metric">
+    <span class="label">Diferenciador</span>
+    <span class="value">QR por mesa (opt-in + ubicación exacta)</span>
+</div>
+
+<h3>Próximos Pasos</h3>
+<ol>
+    <li>Lanzar en una ciudad/zona con alta densidad de bares</li>
+    <li>Onboarding agresivo de bares (gratis los primeros 3 meses)</li>
+    <li>Generar masa crítica de usuarios con eventos y marketing</li>
+    <li>Iterar producto basado en data real</li>
+    <li>Expandir a otras zonas/ciudades</li>
+</ol>
+
+<hr class="section-divider">
+
+<!-- 6. ESTRATEGIA DE ONBOARDING -->
+<h2>6. Estrategia de Onboarding: Primeros 10-50 Bares</h2>
+
+<h3>Fase 1: Los Primeros 10 Bares (Semanas 1-4)</h3>
+
+<h4>Criterios de selección del bar ideal</h4>
+<ul>
+    <li><strong>Perfil:</strong> Coctelería, bar de copas, rooftop, o bar con ambiente social/joven</li>
+    <li><strong>NO empezar con:</strong> Pubs tranquilos, restaurantes familiares, discotecas (mucho ruido)</li>
+    <li><strong>Zona:</strong> Concentrados en 2-3 barrios/calles cercanas (densidad > cobertura)</li>
+    <li><strong>Tamaño:</strong> Medianos (50-150 personas, 10-30 mesas). Ni muy chicos ni enormes</li>
+    <li><strong>Dueño accesible:</strong> Preferir bares independientes donde puedes hablar con el dueño directo</li>
+</ul>
+
+<h4>Cómo llegar a ellos</h4>
+<div class="flow-step"><div class="num">1</div><span>Ir personalmente al bar en horario tranquilo (martes/miércoles 5-7pm). Pedir un trago, conversar con el dueño/manager.</span></div>
+<div class="flow-step"><div class="num">2</div><span>Pitch de 30 seg: "Tengo una app que le genera ventas extra a tu bar. Tus clientes se regalan tragos entre sí desde el teléfono. Solo ponemos QRs en las mesas. ¿Te cuento en 2 minutos?"</span></div>
+<div class="flow-step"><div class="num">3</div><span>Ofrecer prueba gratis: 3 meses sin costo, sin compromiso, nosotros instalamos los QRs en cada mesa.</span></div>
+<div class="flow-step"><div class="num">4</div><span>Pedir solo UNA cosa: que permita poner los QRs y le cuente al staff cómo funciona.</span></div>
+
+<h4>¿Qué les entregas?</h4>
+<ul>
+    <li><strong>QRs impresos por mesa</strong> — Stickers resistentes a líquidos o tent cards por mesa (nosotros los producimos)</li>
+    <li><strong>One-pager para el staff</strong> — 1 hoja con instrucciones simples</li>
+    <li><strong>Acceso al dashboard</strong> — Métricas en tiempo real</li>
+    <li><strong>Tu WhatsApp directo</strong> — Soporte inmediato las primeras semanas</li>
+</ul>
+
+<div class="highlight-box">
+    <p><strong>Nota sobre los QRs:</strong> Cada mesa tiene un QR único. Esto permite saber en qué mesa está sentado cada usuario, facilita la entrega del trago por parte del staff, y agrega un nivel de ubicación precisa dentro del bar.</p>
+</div>
+
+<h3>Fase 2: De 10 a 30 Bares (Semanas 4-8)</h3>
+
+<h4>Apalancarte en los primeros 10</h4>
+
+<div class="benefit-card">
+    <strong>Social proof</strong>
+    "Ya estamos en [Bar X], [Bar Y] y [Bar Z] en tu zona."
+</div>
+<div class="benefit-card">
+    <strong>Datos reales</strong>
+    "En Bar X se vendieron 47 tragos extra la primera semana."
+</div>
+<div class="benefit-card">
+    <strong>Referidos entre bares</strong>
+    Pedir al dueño que te recomiende con otro bar amigo.
+</div>
+<div class="benefit-card">
+    <strong>Efecto FOMO</strong>
+    "Tus clientes ya usan la app en el bar de al lado."
+</div>
+
+<h4>Tácticas adicionales</h4>
+<table>
+    <tr><th>Táctica</th><th>Cómo</th></tr>
+    <tr><td><strong>Evento de lanzamiento</strong></td><td>Organizar "Noche DateFriendly" en bar aliado. Invitar dueños de otros bares a que vean cómo funciona.</td></tr>
+    <tr><td><strong>Alianza con bartenders</strong></td><td>Son influencers del sector. Si les gusta, convencen al dueño.</td></tr>
+    <tr><td><strong>Instagram local</strong></td><td>Stories en bares activos → otros bares ven que existe.</td></tr>
+    <tr><td><strong>Incentivo por referido</strong></td><td>"Si traes otro bar, te damos 1 mes premium gratis."</td></tr>
+</table>
+
+<div class="highlight-box">
+    <p><strong>Clave:</strong> Mantener densidad geográfica. No saltar a otra ciudad. Ir al barrio contiguo. Objetivo: que un usuario pueda ver 3-5 bares con DateFriendly caminando.</p>
+</div>
+
+<h3>Fase 3: De 30 a 50 Bares (Semanas 8-12)</h3>
+
+<h4>Profesionalizar el proceso</h4>
+<table>
+    <tr><th>Antes (1-10 bares)</th><th>Ahora (30-50 bares)</th></tr>
+    <tr><td>Vas tú personalmente</td><td>1-2 "closers" (pueden ser freelance)</td></tr>
+    <tr><td>Pitch informal en la barra</td><td>Deck corto + demo en tablet</td></tr>
+    <tr><td>Onboarding manual</td><td>Kit de bienvenida estandarizado</td></tr>
+    <tr><td>Soporte por WhatsApp</td><td>Dashboard self-service + grupo WhatsApp</td></tr>
+    <tr><td>QRs genéricos</td><td>QRs personalizados con marca del bar</td></tr>
+</table>
+
+<h4>Kit de Onboarding Estandarizado</h4>
+<div class="flow-step"><div class="num">1</div><span><strong>Email/WhatsApp de bienvenida</strong> con link al dashboard</span></div>
+<div class="flow-step"><div class="num">2</div><span><strong>QRs personalizados por mesa</strong> (con logo del bar) enviados/instalados en 48h</span></div>
+<div class="flow-step"><div class="num">3</div><span><strong>Video de 2 min</strong> explicando al staff cómo funciona</span></div>
+<div class="flow-step"><div class="num">4</div><span><strong>Checklist de activación:</strong> QRs colocados en mesas ✓ Staff informado ✓ Menú cargado ✓ Cuenta bancaria ✓</span></div>
+<div class="flow-step"><div class="num">5</div><span><strong>Primer "push" de usuarios:</strong> Postear en redes que el bar está en DateFriendly</span></div>
+
+<h3>Métricas Clave</h3>
+<table>
+    <tr><th>Métrica</th><th>Meta primeras semanas</th></tr>
+    <tr><td>Bares activos (al menos 1 trago/semana)</td><td>&gt;70% de los registrados</td></tr>
+    <tr><td>Tragos por bar por noche (vie/sáb)</td><td>3-5</td></tr>
+    <tr><td>Tasa de check-in vs. mesas ocupadas</td><td>Empezar 10%, crecer a 30%</td></tr>
+    <tr><td>Retención de bar (sigue activo mes 2)</td><td>&gt;80%</td></tr>
+    <tr><td>Tiempo de onboarding (contacto → QRs activos)</td><td>&lt;7 días</td></tr>
+</table>
+
+<h3>Errores a Evitar</h3>
+
+<div class="security-item">
+    <strong>Expandir geográficamente muy rápido</strong> <span>— Mejor 50 bares en 5 calles que 50 bares en 50 barrios.</span>
+</div>
+<div class="security-item">
+    <strong>No dar seguimiento post-onboarding</strong> <span>— Visitar cada bar la primera semana para verificar QRs visibles en mesas.</span>
+</div>
+<div class="security-item">
+    <strong>Depender solo del dueño</strong> <span>— El staff de barra entrega los tragos. Capacitarlos es clave.</span>
+</div>
+<div class="security-item">
+    <strong>No generar usuarios</strong> <span>— Un bar sin usuarios activos se desanima. Campañas en paralelo.</span>
+</div>
+<div class="security-item">
+    <strong>Complicar el onboarding</strong> <span>— Si requieres más de 1 reunión para activar, estás pidiendo demasiado.</span>
+</div>
+
+<h3>Timeline Sugerido</h3>
+
+<div class="flow-step"><div class="num">1-2</div><span><strong>Semanas 1-2:</strong> Contactar 20-30 bares, cerrar los primeros 5-10. Producir QRs por mesa.</span></div>
+<div class="flow-step"><div class="num">3-4</div><span><strong>Semanas 3-4:</strong> Activar bares, instalar QRs, primer evento, primeros datos.</span></div>
+<div class="flow-step"><div class="num">5-6</div><span><strong>Semanas 5-6:</strong> Usar datos reales para pitch a 10-15 bares más.</span></div>
+<div class="flow-step"><div class="num">7-8</div><span><strong>Semanas 7-8:</strong> Alcanzar 25-30 bares, refinar proceso de QRs.</span></div>
+<div class="flow-step"><div class="num">9+</div><span><strong>Semanas 9-12:</strong> Escalar a 50 bares, empezar a cobrar a los primeros.</span></div>
+
+<hr class="section-divider">
+
+<footer>
+    <p><strong>DateFriendly</strong> — www.datefriendly.com</p>
+    <p>Documento confidencial | Julio 2026</p>
+</footer>
+
+</body>
+</html>
