@@ -220,7 +220,29 @@
 <h2>1. El Concepto</h2>
 
 <h3>¿Qué es DateFriendly?</h3>
-<p>Una app donde los clientes de un bar pueden regalarse tragos entre sí directamente desde sus teléfonos. El sistema de check-in por QR asegura que solo participan quienes quieren.</p>
+<p>Una progressive web app (PWA) donde los clientes de un bar pueden regalarse tragos entre sí directamente desde sus teléfonos. El sistema de check-in por QR asegura que solo participan quienes quieren.</p>
+
+<h3>Antes de ir al bar</h3>
+<p>Desde la app puedes:</p>
+<ul>
+    <li><strong>Ver bares suscritos a DateFriendly</strong> cercanos a tu ubicación</li>
+    <li><strong>Ver cuánta gente hay activa</strong> en cada bar (personas con check-in)</li>
+    <li><strong>Fase 1:</strong> Se muestra el total de personas activas por bar</li>
+    <li><strong>Fase 2:</strong> Se separa por género: hombres, mujeres, "prefiero no decir"</li>
+</ul>
+
+<h3>Tu Perfil</h3>
+<p>Al registrarte creas un perfil con:</p>
+<ul>
+    <li><strong>Nombre</strong></li>
+    <li><strong>Foto</strong></li>
+    <li><strong>Sexo</strong> (hombre, mujer, prefiero no decir)</li>
+    <li><strong>Interesado/a en</strong> (hombres, mujeres, ambos, todos)</li>
+</ul>
+
+<div class="highlight-box">
+    <p><strong>Nota técnica:</strong> DateFriendly es una Progressive Web App (PWA). No requiere descarga desde App Store/Play Store. Se accede desde el navegador y se puede instalar en la pantalla de inicio como una app nativa.</p>
+</div>
 
 <h3>¿Cómo funciona?</h3>
 
@@ -464,7 +486,16 @@
 
 <h3>Core (Ya implementadas)</h3>
 <div class="feature-item priority-high">
-    <strong>✓ Geolocalización</strong> <span>— Ver bares cercanos</span>
+    <strong>✓ Progressive Web App (PWA)</strong> <span>— Sin descarga. Acceso desde navegador, instalable en pantalla de inicio.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>✓ Perfil de usuario</strong> <span>— Nombre, foto, sexo, e interesado/a en (hombres, mujeres, ambos, todos).</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>✓ Listado de bares cercanos</strong> <span>— Ver bares con DateFriendly cerca tuyo + cuánta gente activa hay en cada uno.</span>
+</div>
+<div class="feature-item priority-high">
+    <strong>✓ Geolocalización</strong> <span>— Ver bares cercanos ordenados por distancia</span>
 </div>
 <div class="feature-item priority-high">
     <strong>✓ Check-in vía QR de mesa</strong> <span>— Cada mesa tiene un QR único. Opt-in voluntario con ubicación precisa.</span>
@@ -478,9 +509,6 @@
 
 <h3>Prioridad Alta (MVP / Lanzamiento)</h3>
 
-<div class="feature-item priority-high">
-    <strong>Perfil básico</strong> <span>— Foto, nombre, bio corta. Necesario para decidir si aceptar.</span>
-</div>
 <div class="feature-item priority-high">
     <strong>Menú digital del bar</strong> <span>— El usuario elige qué trago enviar del menú real.</span>
 </div>
@@ -522,6 +550,9 @@
 </div>
 <div class="feature-item priority-med">
     <strong>Filtros de visibilidad</strong> <span>— Género, rango de edad, etc.</span>
+</div>
+<div class="feature-item priority-med">
+    <strong>Desglose de personas activas por género</strong> <span>— En el listado de bares, separar cuántos son hombres, mujeres o "prefiero no decir" (Fase 2).</span>
 </div>
 <div class="feature-item priority-med">
     <strong>Notificación pre-visita</strong> <span>— "Bar X tiene 8 personas activas ahora".</span>
@@ -1168,6 +1199,9 @@
 
 <table>
     <tr><th>Tema</th><th>Decisión</th></tr>
+    <tr><td><strong>Tecnología</strong></td><td>Progressive Web App (PWA). Sin descarga de app store. Se accede desde el navegador.</td></tr>
+    <tr><td><strong>Perfil de usuario</strong></td><td>Nombre, foto, sexo (H/M/prefiero no decir), interesado/a en (hombres, mujeres, ambos, todos).</td></tr>
+    <tr><td><strong>Listado de bares</strong></td><td>Se ven bares cercanos con DateFriendly y cuánta gente activa hay. Fase 1: total. Fase 2: desglose por género.</td></tr>
     <tr><td><strong>Pago del trago</strong></td><td>Se paga en la barra como cualquier consumo. El que envía llama al garzón y le dice: "Un [trago] para la mesa X, cárgalo a mi cuenta". DateFriendly no procesa pagos.</td></tr>
     <tr><td><strong>Identificación de mesa</strong></td><td>QR único por mesa. Se evalúan alternativas (NFC, selección manual) según fricción en terreno.</td></tr>
     <tr><td><strong>Revelación de mesa</strong></td><td>La mesa del otro se revela SOLO después de que acepta el trago. Antes, no se sabe dónde está.</td></tr>
